@@ -16,9 +16,25 @@ $_backend_failed = isset($_SESSION['backend_failed']) ? $_SESSION['backend_faile
 $_form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
 // print_r($_SESSION['backend_failed']);
 
-print_r($_SESSION['form_data']);
+// print_r($_SESSION['form_data']);
+// print_r($_SESSION['backend_failed']);
+
+// print_r($_form_data);
+
 
 $_test = true;
+
+
+// print_r(empty($_form_data) && $_test);
+// print_r(empty($_form_data) === true);
+// print_r(!empty($_form_data));
+
+
+
+
+
+// unset($_SESSION['form_data']);
+// unset($_SESSION['backend_failed']);
 
 // -- >> для тестирования >> -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 // if ( isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
@@ -183,6 +199,7 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 			</div> <!-- end .card -->
 
 			<form name="apform" id="apform" method="post" action="action.php" enctype="multipart/form-data" onSubmit="return submitForm2(this);">
+			<!-- <form name="apform" id="apform" method="post" action="action.php" enctype="multipart/form-data"> -->
 				<div class="card mb-4">
 					<div class="card-body">
 
@@ -202,7 +219,7 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 						$fcount++;
 						$backend_info = false;
 
-
+						// print_r("Key: " . $row_form['name'] . "<br>");
 
 						// ****8**** //
 						
@@ -210,7 +227,12 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 							$field_name = ${$row_form['name']};
 						} else {
 							$key = $row_form['name'];
-							$field_name = $form_data[$key];
+							// print_r('here');
+							// print_r($key);
+							$field_name = $_form_data[$key];
+							$agent_blocks_num = $_form_data['agent_blocks_num'];
+							$bank_blocks_num = $_form_data['bank_blocks_num'];
+							// print_r($field_name);
 						}
 
 
@@ -532,7 +554,7 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 
 </div> <!-- end form-wrapper -->
 
-<script src="/js/form_check.js"></script>
+<script src="/js/form_check.js?ver=<?php echo time(); ?>"></script>
 </body>
 
 </html>

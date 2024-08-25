@@ -14,7 +14,7 @@ $query = mysql_query( "SELECT `fieldtype`, `mandatory`, `name`, `regexp` FROM `i
 
 
 // print_r($_POST);
-print_r($_backend_failed);
+// print_r($_backend_failed);
 
 $row_test = mysql_fetch_assoc( $query );
 
@@ -26,17 +26,26 @@ $row_test = mysql_fetch_assoc( $query );
 
 while ( $_row = mysql_fetch_assoc( $query ) ) {
 	$key = $_row['name'];
+	$regexp = isset($_row['regexp']) ? '/' . $_row['regexp'] . '/' : '';
+
+	// print_r($regexp . "   ");
+	// print_r($_row);
+	// print_r($key);
 
 	// print_r($key);
 
 	if ( isset( $_POST[ $key ] ) ) {
 		$val = $_POST[ $key ];
+
+		// print_r($val);
+
 		$_row['fieldtype'] = (int) $_row['fieldtype'];
 		if ( in_array( $_row['fieldtype'], [1, 2, 3, 4, 6], true ) ) {
 			if ( $_row['fieldtype'] === 4 ) {
 				$val = is_array( $val ) ? implode( ',', $val ) : '';
 			}
 			$val = clear_hyphen( str_replace( '’', "'", stripslashes( strip_tags( trim( $val ) ) ) ) );
+
 
 
 			// *********************//
@@ -48,9 +57,63 @@ while ( $_row = mysql_fetch_assoc( $query ) ) {
 
 			// *******************//
 
-			if ( $val == '' && $_row['mandatory'] ) {
+
+			// switch ($i) {
+			// 	case 0:
+			// 		echo "i equals 0";
+			// 		break;
+			// 	case 1:
+			// 		echo "i equals 1";
+			// 		break;
+			// 	case 2:
+			// 		echo "i equals 2";
+			// 		break;
+			// 	default:
+			// 	   echo "i is not equal to 0, 1 or 2";
+			// }
+
+			// if ( $val == '' && $_row['mandatory'] ) {
+			// 	$_backend_failed[] = $key;
+			// 	continue;
+			// } 
+
+
+			// if ( $val !== '' ) {	
+			// 	if ( in_array( $_row['name'], $_iban_fields ) ) {
+			// 		if (!validateUAIBAN($val)) {
+			// 			$_backend_failed[] = $key;
+			// 			continue;
+			// 		}
+			// 	} else if ($_row['regexp']) {
+			// 		if (!preg_match($_row['regexp'], $val)) {
+			// 			$_backend_failed[] = $key;
+			// 			continue;
+			// 		}
+			// 	}
+			// } else ($_row['mandatory']) {
+			// 	$_backend_failed[] = $key;
+			// 	continue;
+			// }
+
+			
+
+			if ($val == '' && $_row['mandatory']) {
 				$_backend_failed[] = $key;
 				continue;
+			}
+
+			if ($val !== '') {
+				if ( in_array( $_row['name'], $_iban_fields ) ) {
+					if (!validateUAIBAN($val)) {
+						$_backend_failed[] = $key;
+						continue;
+					}
+				} else if (isset($regexp) && $regexp !== "" ) {
+					if (!preg_match($regexp, $val)) {
+						$_backend_failed[] = $key;
+						continue;
+					}
+				}
 			}
 
 			$_db_rows[ $_row['name'] ] = $val;

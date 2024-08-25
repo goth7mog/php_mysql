@@ -56,7 +56,7 @@ function db_set_array( $_set ) {
 
 //-----------------*-----------------------//
 
-function validateUAIBAN($iban, $regex) {
+function validateUAIBAN($iban) {
     // Remove spaces and hyphens
     $iban = str_replace([' ', '-'], '', $iban);
 
@@ -66,8 +66,7 @@ function validateUAIBAN($iban, $regex) {
     }
 
     // Check if the IBAN matches the Ukrainian format
-    // if (!preg_match('/^UA[0-9]{27}$/i', $iban)) {
-    if (!preg_match($regex, $iban)) {
+    if (!preg_match('/^UA[0-9]{27}$/i', $iban)) {
         return false;
     }
 
