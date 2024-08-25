@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+    db:
+        # image: mysql:8.0.28-oracle
+        image: mysql:5.5
+        # image: mysql:5.7
+        # command: ['--default-authentication-plugin=mysql_native_password']
+        command:
+            [
+                '--character-set-server=utf8mb3',
+                '--default-authentication-plugin=mysql_native_password'
+            ]
+        container_name: db
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        volumes:
+            - test-mysql:/var/lib/mysql
+            # - db_timur5:/var/lib/mysql Previous db with 60k items
+    phpadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: unless-stopped
+        ports:
+            - 8080:80
+        environment:
+            - PMA_HOST=db
+            - PMA_PORT=3306
+            # - PMA_ARBITRARY=1
+            # - PMA_USER=admin
+volumes:
+    test-mysql:
+        driver: local
