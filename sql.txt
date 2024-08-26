@@ -1,9 +1,14 @@
+  INSERT INTO `inputs_exch` (`ord`, `name`, `value`, `descr`, `fieldtype`, `parent`, `header`, `mandatory`, `pctwidth`, `note`, `regexp`, `validation_info`) VALUES ('76', 'agent_fullname_eng1', '', '', '1', '', '0', '0', '50', '(англійською мовою)', '', ''), ('97', 'agent_fullname_eng2', '', '', '1', '', '0', '0', '50', '(англійською мовою)', '', ''), ('118', 'agent_fullname_eng3', '', '', '1', '', '0', '0', '50', '(англійською мовою)', '', '');
+
+
   ALTER TABLE `users`
   DROP `bank_code1`,
   DROP `bank_code2`,
   DROP `bank_code3`;
 	
+
   DELETE FROM inputs_exch WHERE name IN ('bank_code1', 'bank_code2', 'bank_code3');
+
 
   UPDATE `inputs_etch` SET `value` = '«Державна»,«Приватна»,«Комунальна»', `fieldtype` = '3', `pctwidth` = '50' WHERE `inputs_exch`.`name` = 'company_ownership_form';
  
