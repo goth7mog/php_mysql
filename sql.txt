@@ -1,4 +1,10 @@
-1) Замінити на селект - UPDATE `inputs_etch` SET `value` = '«Державна»,«Приватна»,«Комунальна»', `fieldtype` = '3', `pctwidth` = '50' WHERE `inputs_exch`.`name` = 'company_ownership_form';
+  ALTER TABLE `users`
+  DROP `bank_code1`,
+  DROP `bank_code2`,
+  DROP `bank_code3`;
+	
+  DELETE FROM inputs_exch WHERE name IN ('bank_code1', 'bank_code2', 'bank_code3');
 
-2) 
-
+  UPDATE `inputs_etch` SET `value` = '«Державна»,«Приватна»,«Комунальна»', `fieldtype` = '3', `pctwidth` = '50' WHERE `inputs_exch`.`name` = 'company_ownership_form';
+ 
+  

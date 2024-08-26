@@ -84,7 +84,7 @@ if ( empty($_form_data) && empty($_backend_failed) && $_test ) {
 	$bank_name_eng1 = 'Joint Stock Company "State Export-Import Bank of Ukraine"';
 	$bank_address1 = 'м. Київ, вул. Антоновича, 127';
 	$banking_account1 = 'UA213223130000026007233566001';
-	$bank_code1 = '322313';
+	// $bank_code1 = '322313';
 	$bank_blocks_num = 1;
 
 	$ceo_fullname_nom = 'Керівник Віталій Олександрович';
@@ -207,7 +207,7 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 
 						$newcard_field_arr = array( 'company_info', 'bank_details1', 'ceo_info', 'agent_info1', 'documents_list' );
 						$bank_details_headers = array( 'bank_details1', 'bank_details2', 'bank_details3' );
-						$bank_details_footers = array( 'bank_code1', 'bank_code2', 'bank_code3' );
+						$bank_details_footers = array( 'banking_account1', 'banking_account2', 'banking_account3' );
 						$agent_info_headers = get_agent_info_headers();
 						$agent_info_footers = $agent_docs = get_agent_docs();
 
