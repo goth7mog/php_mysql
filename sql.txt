@@ -1,0 +1,4 @@
+1) Замінити на селект - UPDATE `inputs_etch` SET `value` = '«Державна»,«Приватна»,«Комунальна»', `fieldtype` = '3', `pctwidth` = '50' WHERE `inputs_exch`.`name` = 'company_ownership_form';
+
+2) 
+

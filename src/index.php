@@ -43,7 +43,7 @@ $_test = true;
 
 
 
-if ( empty($_form_data) && $_test ) {
+if ( empty($_form_data) && empty($_backend_failed) && $_test ) {
 	$accreditation_sections = array( '«Скраплений газ»', '«Нафтопродукти»' );
 	$accreditation_period = '12';
 
@@ -52,7 +52,7 @@ if ( empty($_form_data) && $_test ) {
 	$company_shortname_ukr = 'ТОВ "ТЕСТ"';
 	$company_shortname_eng = '"TEST" Co Ltd';
 	$company_constituent_doc = 'статуту';
-	$company_ownership_form = 'колективна';
+	$company_ownership_form = '«Державна»';
 	$company_legal_address_code = '01001';
 	$company_legal_address_country = 'Україна';
 	$company_legal_address_oblast = 'Київська';
@@ -222,10 +222,8 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 						// print_r("Key: " . $row_form['name'] . "<br>");
 
 						// ****8**** //
-						
-						if ( empty($_form_data) && $_test ) {
-							$field_name = ${$row_form['name']};
-						} else {
+
+						if ( !empty($_form_data) && !empty($_backend_failed) ) {
 							$key = $row_form['name'];
 							// print_r('here');
 							// print_r($key);
@@ -233,6 +231,8 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 							$agent_blocks_num = $_form_data['agent_blocks_num'];
 							$bank_blocks_num = $_form_data['bank_blocks_num'];
 							// print_r($field_name);
+						} else if ( $_test === true ) {
+							$field_name = ${$row_form['name']};
 						}
 
 
