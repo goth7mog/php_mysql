@@ -2,38 +2,24 @@ version: '3.1'
 
 services:
   php:
-    # image: arm64v8/php:5.6-apache
-    # image: arm64v8/php:8.1.28-apache
-    # image: devilbox/php-fpm-5.4:latest
     build: .
     container_name: php56
-    # env_file:
-    #   - .env
     volumes:
       - ./src:/var/www/html
-      # - ./php-ini/php.ini:/usr/local/etc/php/conf.d/php.ini
     ports:
       - "80:80"
     depends_on:
       - db
-    # command: sh -c "mv /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini"
 
   db:
-    # image: arm64v8/mysql:5.5
     image: biarms/mysql:5.5
     container_name: mysql55
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      # MYSQL_DATABASE: ueex_tt
-      # MYSQL_USER: root
-      # MYSQL_PASSWORD:
     ports:
       - "3306:3306"
-    # command: >
-    #   bash -c "mysql -u root -p${MYSQL_ROOT_PASSWORD} < ueex_tt.sql" 
     volumes:
-      # - mysql_5.5:/var/lib/mysql
       - ./src/sql:/docker-entrypoint-initdb.d
   phpadmin:
     image: phpmyadmin/phpmyadmin
@@ -45,8 +31,6 @@ services:
     environment:
       - PMA_HOST=db
       - PMA_PORT=3306
-      # - PMA_ARBITRARY=1
-      # - PMA_USER=admin
 
 volumes:
   mysql_5.5:

@@ -15,7 +15,6 @@ function submitForm2(form, action) {
 		$(form).find(':input:not([type="hidden"]):hidden').prop('disabled', true);
 	}
 	return result;
-	// return false;
 }
 
 function setBankMandatory(form_id) {

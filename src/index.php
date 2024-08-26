@@ -10,38 +10,20 @@ $type_title = 'Інші біржові торги';
 $prev_nested = false;
 $bank_blocks_maxnum = 3;
 $agent_blocks_maxnum = BROKER_COUNT;
-// $_backend_failed = ['banking_account1', 'company_phone'];
 $_backend_failed = isset($_SESSION['backend_failed']) ? $_SESSION['backend_failed'] : [];
-// $_backend_failed = [];
 $_form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : [];
-// print_r($_SESSION['backend_failed']);
 
-// print_r($_SESSION['form_data']);
-// print_r($_SESSION['backend_failed']);
-
-// print_r($_form_data);
-
+// ----------------*----------------//
 
 $_test = true;
-
-
-// print_r(empty($_form_data) && $_test);
-// print_r(empty($_form_data) === true);
-// print_r(!empty($_form_data));
-
-
-
-
-
 // unset($_SESSION['form_data']);
 // unset($_SESSION['backend_failed']);
 
+// ---------------*---------------//
+
+
+
 // -- >> для тестирования >> -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-// if ( isset($_SESSION['form_data']) && !empty($_SESSION['form_data'])) {
-
-// }
-
-
 
 if ( empty($_form_data) && empty($_backend_failed) && $_test ) {
 	$accreditation_sections = array( '«Скраплений газ»', '«Нафтопродукти»' );
@@ -173,7 +155,7 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 	<link rel="stylesheet" href="/font/simple-line-icons/css/simple-line-icons.css">
 	<link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/dore.light.blueyale.css">
-	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/main.css?ver=<?php echo time(); ?>">
 	<script>(function (html) {
 			html.className = html.className.replace(/\bno-js\b/, 'js')
 		})(document.documentElement);</script>
@@ -199,7 +181,6 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 			</div> <!-- end .card -->
 
 			<form name="apform" id="apform" method="post" action="action.php" enctype="multipart/form-data" onSubmit="return submitForm2(this);">
-			<!-- <form name="apform" id="apform" method="post" action="action.php" enctype="multipart/form-data"> -->
 				<div class="card mb-4">
 					<div class="card-body">
 
@@ -219,24 +200,18 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 						$fcount++;
 						$backend_info = false;
 
-						// print_r("Key: " . $row_form['name'] . "<br>");
 
-						// ****8**** //
-
+						// *** Подставить данные с прошлой формы
 						if ( !empty($_form_data) && !empty($_backend_failed) ) {
+
 							$key = $row_form['name'];
-							// print_r('here');
-							// print_r($key);
 							$field_name = $_form_data[$key];
 							$agent_blocks_num = $_form_data['agent_blocks_num'];
 							$bank_blocks_num = $_form_data['bank_blocks_num'];
-							// print_r($field_name);
+
 						} else if ( $_test === true ) {
 							$field_name = ${$row_form['name']};
 						}
-
-
-						// ****8**** //
 
 
 
@@ -421,11 +396,10 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 		</div> <!-- end .col -->
 
 		<script>
-			// ***************//
+
 			document.addEventListener('DOMContentLoaded', function() {
 				document.getElementById('agree_cb').checked = false;
 			});
-			// document.getElementById('agree_cb').checked = false;
 
 			<?php if (!empty($_backend_failed)) {?>
 
@@ -442,7 +416,6 @@ $info_text3 = 'Будь ласка, відкорегуйте поля анкет
 					$("#error_msg").show();
 					
 					setTimeout(function() {
-						// $("#error_msg").hide();
 						$("#error_msg").slideUp(400);
 					}, 2500);
 				});

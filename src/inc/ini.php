@@ -19,13 +19,6 @@ $dbusername = 'root';
 $dbpassword = 'root';
 
 
-// $hostname = getenv('MYSQL_HOST');
-// $dbname = getenv('MYSQL_DATABASE');
-// $dbusername = getenv('DB_USER');
-// $dbpassword = getenv('MYSQL_ROOT_PASSWORD');
-
-
-
 $db_connect = mysql_connect( $hostname, $dbusername, $dbpassword ) or die( 'DB connection failed!' );
 mysql_select_db( $dbname ) or die( mysql_error() );
 mysql_query( "SET NAMES utf8, character_set_results='utf8', collation_connection='utf8_general_ci'" );
